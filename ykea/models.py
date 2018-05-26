@@ -6,7 +6,7 @@ from django.contrib import auth
 # Create your models here.
 
 class Wallet(models.Model):
-    id = models.AutoField(primary_key = True)
+    id = models.AutoField(primary_key = True, unique = True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     money = models.FloatField()
 
@@ -45,22 +45,22 @@ class Item(models.Model):
 
 class Shoppingcart(models.Model):
     #id_cart = models.CharField(max_length=8, unique=True)
-    id_cart = models.AutoField(primary_key = True)
+    id_cart = models.AutoField(primary_key = True, unique = True)
     item_list = models.ManyToManyField(Item, through='Quantity', blank = True, null = True, default = None)
 
 class Quantity(models.Model):
-    id_quant = models.AutoField(primary_key = True)
+    id_quant = models.AutoField(primary_key = True, unique = True)
     shopping_cart = models.ForeignKey(Shoppingcart, on_delete=models.CASCADE)
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     quantitat = models.IntegerField()
 
 class Bill(models.Model):
-    id_bill = models.AutoField(primary_key = True)
+    id_bill = models.AutoField(primary_key = True, unique = True)
     user = models.ForeignKey(Wallet, on_delete=models.CASCADE)
     total = models.DecimalField(max_digits=8, decimal_places=2)
 
 class ItemBill(models.Model):
-    id_itemBill = models.AutoField(primary_key = True)
+    id_itemBill = models.AutoField(primary_key = True, unique = True)
     bill = models.ForeignKey(Bill, on_delete=models.CASCADE)
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     quantitat = models.IntegerField()
