@@ -145,8 +145,9 @@ REST_FRAMEWORK = {
       'PAGE_SIZE': 20,
       'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination'
 }
+ALLOWED_HOSTS = ['temp-ykeaa4.herokuapp.com']
 
-CORS_ORIGIN_ALLOW_ALL = True;
+CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_METHODS = (
     'DELETE',
     'GET',
