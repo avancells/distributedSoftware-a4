@@ -1,0 +1,168 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>YKEA - Homepage</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'ykea/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'ykea/css/shop-homepage.css' %}" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">Y K E A</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'home'%}">Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            {% if auth %}
+                <li class="nav-item">
+                <a class="nav-link" >User: {{user}}</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" >Money: {{money}}</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout'%}">Logout</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                <a class="nav-link" href="{% url 'login'%}">Login</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="{% url 'register'%}">Register</a>
+                </li>
+            {% endif %}
+
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+      <div class="row">
+
+        <div class="col-lg-3">
+
+          <h1 class="my-4">Categories</h1>
+          <div class="list-group">
+            {% if categories %}
+                {% for elem, descrip in categories%}
+                    <a href="{% url 'items' elem%}" class="list-group-item"> {{descrip}}  </a>
+                {% endfor %}
+            {% endif %}
+          </div>
+
+        </div>
+        <!-- /.col-lg-3 -->
+
+        <div class="col-lg-9">
+          <br><br><br><br>
+
+            <form action="{% url 'process_item'%}" method="post">
+                {% csrf_token %}
+
+            Item Number:
+            <input id="item_number" type="text" size="8" min="0" maxlength="8" style="text-align:right;width: 8em;" name="item_number">
+            <br>
+            Name:
+            <input id="name" type="text" size="50" min="0" maxlength="50" style="text-align:right;width:10em;" name="name">
+            <br>
+            <p class="formfield">
+                Description: <br>
+                <textarea name="description" rows="4" cols="50">
+                </textarea>
+            </p>
+            <br>
+            Price:
+            <input id="price" type="number" size="8" min="0" max="99999999" style="text-align:right;width: 8em;" name="price">€
+            <br>
+            Is new?
+            True: <input type="checkbox" id="true" onclick=(uncheckFalse())> False: <input type="checkbox" id="false" onclick=(uncheckTrue())>
+            <script>
+            function uncheckFalse() {
+                document.getElementById("false").checked = false;
+            }
+
+            function uncheckTrue() {
+                document.getElementById("true").checked = false;
+            }
+            </script>
+            <br>
+            Size:
+            <input id="size" type="text" size="10" min="0" maxlength="10" style="text-align:right;width:10em;" name="size"> cm
+            <br>
+            Instructions:
+
+            <br>
+            Featured photo:
+
+            <br>
+            Category: <br>
+            {% if categories %}
+                <select name="categories" multiple>
+                {% for elem, descrip in categories%}
+                    <option value={{elem}}>{{descrip}}</option>
+                {% endfor %}
+                </select>
+            {% else %}
+                <p>No categories are available.</p>
+            {% endif %}
+            <br>
+
+            <input type="submit" value="Afegir" name = "G"/>
+            </form>
+
+
+
+          </div>
+          <!-- /.row -->
+
+        </div>
+        <!-- /.col-lg-9 -->
+
+      </div>
+      <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="{% static 'ykea/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'ykea/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+  </body>
+
+</html>

@@ -1,0 +1,160 @@
+[
+  {
+    "model": "ykea.Item",
+    "pk": 1,
+    "fields": {
+      "item_number": "09186777",
+      "name": "KONGSWDFJORD",
+      "description" :"Divan bed, Hyllestad firm, Tustna dark grey",
+      "price" : "1488",
+      "is_new" : "True",
+      "size" : "160x200 cm",
+      "category" : "beds"
+    }
+  },
+    {
+    "model": "ykea.Item",
+    "pk": 2,
+    "fields": {
+      "item_number": "70294339",
+      "name": "LISBAÖFJK",
+      "description" :"Table, ash veneer",
+      "price" : "99",
+      "is_new" : "False",
+      "size" : "140x78 cm",
+      "category" : "table"
+    }
+  },
+    {
+    "model": "ykea.Item",
+     "pk": 3,
+     "fields": {
+       "item_number": "69210208",
+       "name": "ESPEVÄR",
+       "description" :"Divan bed, Hafslo medium firm, Talgje beige",
+       "price" : "478",
+       "is_new" : "True",
+       "size" : "160x200 cm",
+       "category" : "beds"
+     }
+   },
+   {
+    "model": "ykea.Item",
+    "pk": 4,
+    "fields": {
+      "item_number": "79902935",
+      "name": "BRIMNES",
+      "description" :"Bed frame with storage, white",
+      "price" : "119",
+      "is_new" : "True",
+      "size" : "140x200 cm",
+      "category" : "beds"
+    }
+  },
+  {
+   "model": "ykea.Item",
+   "pk": 5,
+   "fields": {
+     "item_number": "09176165",
+     "name": "MALM",
+     "description" :"Bed frame, w 2 storage boxes, white, Leirsund",
+     "price" : "319",
+     "is_new" : "True",
+     "size" : "140x200 cm",
+     "category" : "beds"
+   }
+  },
+  {
+    "model": "ykea.Item",
+     "pk": 6,
+     "fields": {
+       "item_number": "60340822",
+       "name": "EKEDALEN",
+       "description" :"Extendable table, birch",
+       "price" : "169",
+       "is_new" : "True",
+       "size" : "180x80 cm",
+       "category" : "table"
+     }
+   },
+
+   {
+    "model": "ykea.Item",
+     "pk": 7,
+     "fields": {
+       "item_number": "40063632",
+       "name": "DOCKSTA",
+       "description" :"Table, white",
+       "price" : "199",
+       "is_new" : "True",
+       "size" : "105 cm",
+       "category" : "table"
+     }
+   },
+   {
+    "model": "ykea.Item",
+     "pk": 8,
+     "fields": {
+       "item_number": "40242592",
+       "name": "NORDEN",
+       "description" :"Extendable table, birch",
+       "price" : "199",
+       "is_new" : "True",
+       "size" : "210x90 cm",
+       "category" : "table"
+     }
+   },
+   {
+    "model": "ykea.Item",
+     "pk": 9,
+     "fields": {
+       "item_number": "59256292",
+       "name": "GRÖNLID",
+       "description" :"Three-seat sofa, Ljungen light green",
+       "price" : "399",
+       "is_new" : "False",
+       "size" : "247x98 cm",
+       "category" : "sofa"
+     }
+   },
+   {
+    "model": "ykea.Item",
+     "pk": 10,
+     "fields": {
+       "item_number": "49129209",
+       "name": "EKTORP",
+       "description" :"Three-seat sofa, Nordvalla dark veige",
+       "price" : "399",
+       "is_new" : "True",
+       "size" : "218x88 cm",
+       "category" : "sofa"
+     }
+   },
+   {
+    "model": "ykea.Item",
+     "pk": 11,
+     "fields": {
+       "item_number": "89257742",
+       "name": "DELAKTIG",
+       "description" :"Two-seat sofa, Tallmyra white/black",
+       "price" : "649",
+       "is_new" : "True",
+       "size" : "149x84 cm",
+       "category" : "sofa"
+     }
+   },
+   {
+    "model": "ykea.Item",
+     "pk": 12,
+     "fields": {
+       "item_number": "39205331",
+       "name": "VIMLE",
+       "description" :"Two-seat sofa, Orrsta golden-yellow",
+       "price" : "399",
+       "is_new" : "True",
+       "size" : "171x98 cm",
+       "category" : "sofa"
+     }
+   }
+
+]
