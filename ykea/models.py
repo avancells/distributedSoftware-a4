@@ -46,7 +46,7 @@ class Item(models.Model):
 class Shoppingcart(models.Model):
     #id_cart = models.CharField(max_length=8, unique=True)
     id_cart = models.AutoField(primary_key = True, unique = True)
-    item_list = models.ManyToManyField(Item, through='Quantity', blank = True, null = True, default = None)
+    item_list = models.ManyToOneField(Item, through='Quantity', blank = True, null = True, default = None)
 
 class Quantity(models.Model):
     id_quant = models.AutoField(primary_key = True, unique = True)
