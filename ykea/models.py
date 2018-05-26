@@ -55,12 +55,12 @@ class Quantity(models.Model):
     quantitat = models.IntegerField()
 
 class Bill(models.Model):
-    id_bill = models.AutoField(primary_key = True, unique = True)
+    id_bill = models.AutoField(unique = True)
     user = models.ForeignKey(Wallet, on_delete=models.CASCADE)
     total = models.DecimalField(max_digits=8, decimal_places=2)
 
 class ItemBill(models.Model):
-    id_itemBill = models.AutoField(primary_key = True, unique = True)
+    id_itemBill = models.AutoField(unique = True)
     bill = models.ForeignKey(Bill, on_delete=models.CASCADE)
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     quantitat = models.IntegerField()
