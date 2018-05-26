@@ -88,7 +88,7 @@ def shoppingcart(request):
 
         else:
             #cart, created = Shoppingcart.objects.get_or_create(id_cart = ShoppingCounter.counter)
-            cart = Shoppingcart.objects.create(item = Item.objects.get(item_number = '09186777'))
+            cart = Shoppingcart.objects.create(id_cart = 0)
             #ShoppingCounter.counter+=1;
             cart.save()
             request.session["cart"] = cart.id_cart
