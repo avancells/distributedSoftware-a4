@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+import django_heroku
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -52,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+     'whitenoise.middleware.WhiteNoiseMiddleware',
 
 ]
 
@@ -129,9 +132,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-STATIC_ROOT = '/ykea/static'
-STATIC_URL = '/ykea/static/'
-MEDIA_URL = '/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
+# Extra places for collectstatic to find static files.
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "media_cdn")
+
+MEDIA_URL = '/media/'
+
 LOGIN_URL = '/ykea/accounts/login'
 LOGIN_REDIRECT_URL = '/ykea/home'
 LOGOUT_URL = '/ykea/accounts/logout'
@@ -145,7 +158,7 @@ REST_FRAMEWORK = {
       'PAGE_SIZE': 20,
       'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination'
 }
-ALLOWED_HOSTS = ['temp-ykeaa4.herokuapp.com']
+ALLOWED_HOSTS = ['.herokuapp.com', 'localhost', '127.0.0.1']
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_METHODS = (
@@ -168,3 +181,6 @@ CORS_ALLOW_HEADERS = (
     'x-csrftoken',
     'x-requested-with',
 )
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())
