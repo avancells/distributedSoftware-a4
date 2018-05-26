@@ -86,7 +86,7 @@ DATABASES = {
         'USER': 'user',
         'PASSWORD': '',
         'HOST': 'localhost',
-        'PORT': '',
+        'PORT': '5432',
         'CONN_MAX_AGE': 500
 
     }
