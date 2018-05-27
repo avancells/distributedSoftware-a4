@@ -345,9 +345,9 @@ class ItemViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(price__lte=price)
         if new is not None:
             if(new.lower() == "yes"):
-                queryset = queryset.filter(is_new='true')
+                queryset = queryset.filter(is_new='True')
             elif(new.lower() =="no"):
-                queryset = queryset.filter(is_new='false')
+                queryset = queryset.filter(is_new='False')
 
 
         return queryset
