@@ -2,10 +2,9 @@ from django.conf.urls import url
 
 from . import views
 
-listOfAddresses = ["127.0.0.1", 'sd2018-ykea-a9.herokuapp.com']
+listOfAddresses = ["sd2018-ykeaa4.herokuapp.com", 'sd2018-ykea-a9.herokuapp.com']
 
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
     url(r'^home/$', views.home, name='home'),
     url(r'^items/$', views.items, name='items2'),
     url(r'^items/(?P<item_number>.\d+)/$', views.description, name='description'),
@@ -23,8 +22,8 @@ urlpatterns = [
     url(r'^process_item/$', views.process_item, name='process_item'),
     url(r'^users/$', views.UserList.as_view()),
     url(r'^users/(?P<pk>[0-9]+)/$', views.UserDetail.as_view()),
-
     url(r'^comparator$', views.comparator, {'ips': listOfAddresses}),
+    url(r'^.*$', RedirectView.as_view(url='</ykea/home>', permanent=False), name='index'),
 
 
 
