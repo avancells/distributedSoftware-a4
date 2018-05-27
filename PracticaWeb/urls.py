@@ -31,5 +31,5 @@ urlpatterns = [
     url(r'^ykea/accounts/logout/$', logout, name='logout'),
     url(r'^api/', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
-    url(r'^.*$', RedirectView.as_view(pattern_name='ykea', permanent=False), name='index'),
+    url(r'^$', lambda r: HttpResponseRedirect('ykea/')),
 ]
