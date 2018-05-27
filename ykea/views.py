@@ -21,7 +21,7 @@ from ykea.permissions import IsCommercial
 
 # Create your views here.
 def index(request):
-    Quantity.objects.all().delete()
+    #Quantity.objects.all().delete()
     return HttpResponse("Hello, world. You're at the YKEA home page.")
 
 def queryMoney(request):
