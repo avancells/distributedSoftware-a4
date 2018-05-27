@@ -95,7 +95,7 @@
                 for(var i=0; i < ips.length; i++){
                     iter_ip = ips[i]
                     $("comparator").html();
-                    requests.push($.ajax({url: 'http://' + ips[i] + ':8000/api/items', type : 'GET', dataType : 'json', error :  function(error, exception){msg = 'Error'; alert(msg);},
+                    requests.push($.ajax({url: 'https://' + ips[i] + ':8000/api/items', type : 'GET', dataType : 'json', error :  function(error, exception){msg = 'Error'; alert(msg);},
                                             success: function (data){
                                             for(var j=0; j < data.results.length; j++){
                                                 var entry ='<div class="col-lg-4 col-md-6 mb-4"><div class="card h-100"><a href="#"><img class="card-img-top" src="';
