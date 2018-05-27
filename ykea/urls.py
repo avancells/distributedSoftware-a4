@@ -2,7 +2,7 @@ from django.conf.urls import url
 
 from . import views
 
-listOfAddresses = ["127.0.0.1"]
+listOfAddresses = ["127.0.0.1", 'sd2018-ykea-a9.herokuapp.com']
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
