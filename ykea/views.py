@@ -337,14 +337,18 @@ class ItemViewSet(viewsets.ModelViewSet):
         queryset = Item.objects.all().order_by('item_number')
         category = self.request.query_params.get('category', None)
         price = self.request.query_params.get('price', None)
-        is_new = self.request.query_params.get('is_new', None)
+        new = self.request.query_params.get('new', None)
 
         if category is not None:
             queryset = queryset.filter(category=category)
         if price is not None:
             queryset = queryset.filter(price__lte=price)
-        if is_new is not None:
-            queryset = queryset.filter(is_new=is_new)
+        if new is not None:
+            if(new.lower() == "yes"):
+                queryset = queryset.filter(is_new='True')
+            elif(new.lower() =="no"):
+                queryset = queryset.filter(is_new='False')
+
 
         return queryset
 
@@ -383,6 +387,7 @@ def comparator(request,ips):
     categories = Item.CATEGORIES
     context = {
         'categories': zip([i[0] for i in categories],[i[1] for i in categories]),
+        'categories2' : zip([i[0] for i in categories],[i[1] for i in categories]),
         'auth' : request.user.is_authenticated(),
         'user' : request.user.username,
         'money' : queryMoney(request),

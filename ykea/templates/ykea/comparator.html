@@ -82,27 +82,72 @@
         <div class="col-lg-9" id="comparator">
           <h1 class="my-4">Comparator</h1>
           <br><br>
-          {{ips}}
+          <b>Quering: </b>{{ips}}
+          <br>
+          <b>Category:</b>
+          {% if categories2 %}
+              <select id="categoryList">
+                {% for elem, descrip in categories2 %}
+                    <option value={{elem}}>{{descrip}}</option>
+                {% endfor %}
+                </select>
+          {% else %}
+              <p>No categories are available.</p>
+          {% endif %}
+
+          <br>
+          <b>Is new?</b>
+          Yes: <input type="checkbox" id="true" onclick=(uncheckFalse())> No: <input type="checkbox" id="false" onclick=(uncheckTrue())>
+          <script>
+          function uncheckFalse() {
+              document.getElementById("false").checked = false;
+          }
+
+          function uncheckTrue() {
+              document.getElementById("true").checked = false;
+          }
+          </script>
+          <br>
+          <input id="price" type="number" size="8" min="0" max="9999999" style="text-align:right;width: 8em;" name="price">€
+
+          <br>
+
+
 
           <button onclick="comparator()">Query Servers</button>
+          <div id="query" class="row">
 
             <script>
             function comparator() {
+
+                var category = $("#categoryList :selected").val();
+                var parameters = "?category=" + category;
+
+                var price = $("#price").val() ;
+                if(price > 0 && price){
+                    parameters += "&price=" + price;
+                }
+
+                if ($("#true").is(":checked")) {
+                  parameters += "&new=yes";
+                }else if($("#false").is(":checked")){
+                  parameters += "&new=no";
+                }
+
+
                 var requests = [];
                 var ips = {{ips | safe}};
                 var results = [];
-                var iter_ip;
                 for(var i=0; i < ips.length; i++){
-                    iter_ip = ips[i]
                     $("comparator").html();
-                    requests.push($.ajax({url: 'https://' + ips[i] + '/api/items', type : 'GET', dataType : 'json', error :  function(error, exception){msg = 'Error'; alert(msg);},
+                    requests.push($.ajax({url: 'https://' + ips[i] + '/api/items' + parameters, type : 'GET', dataType : 'json', error :  function(error, exception){msg = 'Error'; alert(msg);},
                                             success: function (data){
                                             for(var j=0; j < data.results.length; j++){
-                                                var entry ='<div class="col-lg-4 col-md-6 mb-4"><div class="card h-100"><a href="#"><img class="card-img-top" src="';
+                                                var entry ='<div class="card h-100"><a href="#"><img class="card-img-top" src="';
                                                 if(data["results"][j]["featured_photo"]){
                                                     entry += data["results"][j]["featured_photo"];
                                                 }else{
-                                                    entry += "https://sd2018-ykeaa4.herokuapp.com/ykea/static/images/default.jpg"
+                                                    entry += "https://127.0.0.1:8000/ykea/static/images/default.jpg"
                                                 }
 
                                                 entry += '" alt=""></a><h4>';
@@ -112,11 +157,11 @@
                                                 entry +='</h5><p class="card-text">';
                                                 entry += data["results"][j]["description"];
                                                 entry +='</p><h6> From: ';
-                                                entry += iter_ip;
-                                                entry += '</h6></div></div></div>';
+                                                entry +=  data['results'][j]['url'].substring(8, data['results'][j]['url'].indexOf('/', 8));
+                                                entry += '</h6></div></div>';
 
-                                                var added_html = $(entry);
-                                                $("<h5>").html(added_html).appendTo("#comparator");
+                                                var html_copy = $(entry);
+                                                results.push([html_copy, data["results"][j]["price"]]);
 
 
 
@@ -124,7 +169,14 @@
                                             }
                                     }));
                 }
-                $.when.apply($, requests).done(function() {
+                $.when.apply($, requests).always(function() {
+
+                  results.sort(function(a,b){return parseInt(a[1]) - parseInt(b[1]);});
+                  $("#query").html("");
+                  for(var i=0; i< results.length; i++){
+                      $("#query").append($('<div class="col-lg-4 col-md-6 mb-4">').html(results[i][0]).appendTo("#comparator"));
+                  }
+
                 });
 
             }
@@ -132,7 +184,7 @@
 
           </div>
           <!-- /.row -->
-
+        </div>
         </div>
         <!-- /.col-lg-9 -->
 
