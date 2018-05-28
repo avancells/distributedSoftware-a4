@@ -95,8 +95,18 @@
                     <p><font size="3">Preu: {{elem.price}} €<font/></p>
                     <p><font size="3">Nou: {{elem.is_new}}<font/></p>
                     <p><font size="3">Mides: {{elem.size}}<font/></p>
+                    
+                <form action="{% url 'shoppingcart'%}" method="post">
+                {% csrf_token %}
+                    <p hidden>
+                        <label><input type= checkbox name="checkbox{{ elem.item_number }}" id="checkbox{{ elem.item_number }}" value="{{ elem.item_number }}" checked = "checked"/>
+                    </p>
+                    <input type="submit" value="Add to Shopping cart" />
+                </form>
 
                 {% endfor %}
+            
+                
             {% else %}
                 <p>Error.</p>
             {% endif %}
@@ -108,6 +118,7 @@
 
         </div>
         <!-- /.col-lg-9 -->
+
 
       </div>
       <!-- /.row -->
