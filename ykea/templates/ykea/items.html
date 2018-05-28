@@ -36,12 +36,17 @@
               </a>
             </li>
             {% if auth %}
-                <li class="nav-item">
+                <li class="nav-it                <li class="nav-item">
+                <a class="nav-link" href="{% url 'comparator'%}">Comparator</a>
+                </li> em">
                 <a class="nav-link" >User: {{user}}</a>
                 </li>
                 <li class="nav-item">
                 <a class="nav-link" >Money: {{money}}</a>
                 </li>
+                <li class="nav-item">
+                <a class="nav-link" href="{% url 'comparator'%}">Comparator</a>
+                </li> 
                 <li class="nav-item">
                 <a class="nav-link" href="{% url 'logout'%}">Logout</a>
                 </li>
