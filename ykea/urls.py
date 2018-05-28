@@ -24,8 +24,5 @@ urlpatterns = [
     url(r'^users/$', views.UserList.as_view()),
     url(r'^users/(?P<pk>[0-9]+)/$', views.UserDetail.as_view()),
     url(r'^comparator$', views.comparator, {'ips': listOfAddresses}),
-    url(r'^.*$', RedirectView.as_view(pattern_name='home', permanent=False), name='index'),
-
-
 
 ]
