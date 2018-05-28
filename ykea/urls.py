@@ -23,6 +23,6 @@ urlpatterns = [
     url(r'^process_item/$', views.process_item, name='process_item'),
     url(r'^users/$', views.UserList.as_view()),
     url(r'^users/(?P<pk>[0-9]+)/$', views.UserDetail.as_view()),
-    url(r'^comparator$', views.comparator, {'ips': listOfAddresses}),
+    url(r'^comparator$', views.comparator, {'ips': listOfAddresses}, name='comparator'),
 
 ]
