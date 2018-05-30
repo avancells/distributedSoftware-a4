@@ -3,7 +3,7 @@ from django.views.generic.base import RedirectView
 
 from . import views
 
-listOfAddresses = ["sd2018-ykeaa4.herokuapp.com", 'sd2018-ykeaa10.herokuapp.com']
+listOfAddresses = ["sd2018-ykeaa4.herokuapp.com", 'sd2018-ykeaa8.herokuapp.com']
 
 urlpatterns = [
     url(r'^home/$', views.home, name='home'),
