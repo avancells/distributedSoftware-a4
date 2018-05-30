@@ -11,7 +11,7 @@ listOfAddresses = ["sd2018-ykeaa4.herokuapp.com",
                    "sd2018-ykeaa6.herokuapp.com",
                    "sd2018-ykeaa11.herokuapp.com",
                    "sd2018-ykea-a2.herokuapp.com",
-                   "sd2018-ykeaa7.herokuapp.com",
+                   "sd2018-ykeaa07.herokuapp.com",
                    ]
 
 urlpatterns = [
