@@ -29,7 +29,7 @@ router.register(r'items', views.ItemViewSet)
 
 urlpatterns = [
     url(r'^ykea$', RedirectView.as_view(url='ykea/home', permanent=False), name='index'),
-    url(r'^ykea/$', RedirectView.as_view(url='ykea/home', permanent=False), name='index'),
+    url(r'^ykea/$', RedirectView.as_view(url='home', permanent=False), name='index'),
     url(r'^ykea/', include('ykea.urls'), name='ykea'),
     url(r'^admin/', admin.site.urls),
     url(r'^ykea/accounts/login/$',  login, name='login'),
