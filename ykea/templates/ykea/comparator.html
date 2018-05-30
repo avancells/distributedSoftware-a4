@@ -175,7 +175,7 @@
                                             }
                                     }));
                 }
-                $.when.apply($, requests).done(function() {
+                $.when.apply($, requests).fail(function() {
 
                   results.sort(function(a,b){return parseInt(a[1]) - parseInt(b[1]);});
                   $("#query").html("");
