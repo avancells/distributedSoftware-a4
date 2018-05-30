@@ -163,7 +163,7 @@
                                                 entry +='</h5><p class="card-text">';
                                                 entry += data["results"][j]["description"];
                                                 entry +='</p><h6> From: ';
-                                                entry +=  data['results'][j]['url'].substring(8, data['results'][j]['url'].indexOf('/', 8));
+                                                entry +=  data['results'][j]['url'].slice(8, data['results'][j]['url'].indexOf('/', 8));
                                                 entry += '</h6></div></div>';
 
                                                 var html_copy = $(entry);
