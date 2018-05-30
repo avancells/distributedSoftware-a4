@@ -144,7 +144,6 @@
                 var requests = [];
                 var ips = {{ips | safe}};
                 var results = [];
-                $("#query").html("");
                 for(var i=0; i < ips.length; i++){
                     $("comparator").html();
                     requests.push($.ajax({url: 'https://' + ips[i] + '/api/items' + parameters, type : 'GET', dataType : 'json', error :  function(error, exception){msg = 'Error';},
