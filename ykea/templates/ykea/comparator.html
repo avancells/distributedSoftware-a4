@@ -146,7 +146,7 @@
                 var results = [];
                 for(var i=0; i < ips.length; i++){
                     $("comparator").html();
-                    requests.push($.ajax({url: 'https://' + ips[i] + '/api/items' + parameters, type : 'GET', dataType : 'json', error :  function(error, exception){msg = 'Error'; alert(msg);},
+                    requests.push($.ajax({url: 'https://' + ips[i] + '/api/items' + parameters, type : 'GET', dataType : 'json', error :  function(error, exception){msg = 'Error';},
                                             success: function (data){
                                             for(var j=0; j < data.results.length; j++){
                                                 var entry ='<div class="card h-100"><a href="#"><img class="card-img-top" src="';
@@ -175,7 +175,7 @@
                                             }
                                     }));
                 }
-                $.when.apply($, requests).then(function() {
+                $.when.apply($, requests).fail(function() {
 
                   results.sort(function(a,b){return parseInt(a[1]) - parseInt(b[1]);});
                   $("#query").html("");
