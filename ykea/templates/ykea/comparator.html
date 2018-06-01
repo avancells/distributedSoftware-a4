@@ -127,7 +127,7 @@
             function showQuery(data) {
               $("#query").html("");
               data.sort(function(a,b){return parseInt(a[1]) - parseInt(b[1]);});
-              for(var j=0; j< results.length; j++){
+              for(var j=0; j< data.length; j++){
                   var entry ='<div class="card h-100"><a href="#"><img class="card-img-top" src="';
                   if(data["results"][j]["featured_photo"]){
                       entry += data["results"][j]["featured_photo"];
