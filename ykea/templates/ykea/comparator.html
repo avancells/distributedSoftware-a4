@@ -37,14 +37,14 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'comparator'%}">Comparator</a>
-            </li>  
+            </li>
             {% if auth %}
                 <li class="nav-item">
                 <a class="nav-link" >User: {{user}}</a>
                 </li>
                 <li class="nav-item">
                 <a class="nav-link" >Money: {{money}}</a>
-                </li> 
+                </li>
                 <li class="nav-item">
                 <a class="nav-link" href="{% url 'logout'%}">Logout</a>
                 </li>
@@ -115,7 +115,7 @@
           <input id="price" type="number" size="8" min="0" max="9999999" style="text-align:right;width: 8em;" name="price">€
 
           <br>
-          
+
 
 
 
@@ -141,19 +141,21 @@
                 }
 
 
-                var requests = [];
+                //deferred = $.ajax(‘http://api.server.com/'+id, {success: function(result) {results.push(result);} deferreds.push(deferred);});
+
+                var request, requests = [];
                 var ips = {{ips | safe}};
                 var results = [];
                 for(var i=0; i < ips.length; i++){
                     $("comparator").html();
-                    requests.push($.ajax({url: 'https://' + ips[i] + '/api/items' + parameters, type : 'GET', dataType : 'json', error :  function(error, exception){msg = 'Error';},
+                    request = $.ajax({url: 'https://' + ips[i] + '/api/items' + parameters, type : 'GET', dataType : 'json', error :  function(error, exception){msg = 'Error';},
                                             success: function (data){
                                             for(var j=0; j < data.results.length; j++){
                                                 var entry ='<div class="card h-100"><a href="#"><img class="card-img-top" src="';
                                                 if(data["results"][j]["featured_photo"]){
                                                     entry += data["results"][j]["featured_photo"];
                                                 }else{
-                                                    entry += "https://127.0.0.1:8000/ykea/static/images/default.jpg"
+                                                    entry += "https://sd2018-ykeaa4.herokuapp.com/ykea/static/images/default.jpg"
                                                 }
 
                                                 entry += '" alt=""></a><h4>';
@@ -173,15 +175,15 @@
 
                                             }
                                             }
-                                    }));
+                                            requests.push(request);
+                                    });
                 }
-                $.when.apply($, requests).done(function() {
-
+                $.when.apply($, requests).then(function() {
+                  $("#query").html("");
                   results.sort(function(a,b){return parseInt(a[1]) - parseInt(b[1]);});
                   for(var i=0; i< results.length; i++){
                       $("#query").append($('<div class="col-lg-4 col-md-6 mb-4">').html(results[i][0]).appendTo("#comparator"));
                   }
-
                 });
 
             }
