@@ -179,7 +179,7 @@
                     requests.push(request);
 
                 }
-                $.when.apply($, requests).fail(function() {
+                $.when.apply($, requests).always(function() {
                   $("#query").html("");
                   results.sort(function(a,b){return parseInt(a[1]) - parseInt(b[1]);});
                   for(var i=0; i< results.length; i++){
