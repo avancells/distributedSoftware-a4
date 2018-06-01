@@ -175,8 +175,8 @@
 
                                             }
                                             }
-                                            requests.push(request);
                                     });
+                    requests.push(request);
                 }
                 $.when.apply($, requests).then(function() {
                   $("#query").html("");
@@ -187,6 +187,7 @@
                 });
 
             }
+
             </script>
 
           </div>
@@ -213,5 +214,7 @@
     <script src="{% static 'ykea/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 
   </body>
+
+
 
 </html>
