@@ -170,13 +170,13 @@
 
                                                 var html_copy = $(entry);
                                                 results.push([html_copy, data["results"][j]["price"]]);
-
+                                                requests.push(request);
 
 
                                             }
                                             }
                                     });
-                    requests.push(request);
+
                 }
                 $.when.apply($, requests).then(function() {
                   $("#query").html("");
