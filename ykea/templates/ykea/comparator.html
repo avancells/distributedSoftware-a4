@@ -170,15 +170,16 @@
 
                                                 var html_copy = $(entry);
                                                 results.push([html_copy, data["results"][j]["price"]]);
-                                                requests.push(request);
+
 
 
                                             }
                                             }
                                     });
+                    requests.push(request);
 
                 }
-                $.when.apply($, requests).then(function() {
+                $.when.apply($, requests).fail(function() {
                   $("#query").html("");
                   results.sort(function(a,b){return parseInt(a[1]) - parseInt(b[1]);});
                   for(var i=0; i< results.length; i++){
