@@ -176,7 +176,7 @@
                   results.sort(function(a,b){return parseInt(a[1]) - parseInt(b[1]);});
                   $("#query").html("");
                   for(var i=0; i< results.length; i++){
-                    $("#query").append($('<div class="col-lg-4 col-md-6 mb-4">').html(results[i][0]).appendTo("#comparator"));
+                    $("#query").append(results[i][0]));
                   }
                 });
 
