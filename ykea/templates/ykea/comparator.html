@@ -145,7 +145,16 @@
                 var ips = {{ips | safe}};
                 var results = [];
                 for(var i=0; i < ips.length; i++){
-                    requests.push($.ajax({url: 'https://' + ips[i] + '/api/items' + parameters, type : 'GET', dataType : 'json', error :  function(ips){console.log("Error at: " + ips[i]);},
+                    requests.push($.ajax({url: 'https://' + ips[i] + '/api/items' + parameters, type : 'GET', dataType : 'json',
+                        error :  function(){console.log("IP error");
+                        counter += 1;
+                        if (counter == ips.length){
+                          results.sort(function(a,b){return parseInt(a[1]) - parseInt(b[1]);});
+                          for (html in results){
+                            $("#query").append(html[0]);
+                          }
+                        }
+                        },
                         success: function (data){
                         for(var j=0; j < data.results.length; j++){
                             var entry ='<div class="card h-100"><a href="#"><img class="card-img-top" src="';
@@ -167,6 +176,13 @@
 
                             var html_copy = $(entry);
                             results.push([html_copy, data["results"][j]["price"]]);
+                            counter += 1;
+                            if (counter == ips.length){
+                              results.sort(function(a,b){return parseInt(a[1]) - parseInt(b[1]);});
+                              for (html in results){
+                                $("#query").append(html[0]);
+                              }
+                            }
                         }
                         }
                 }))
