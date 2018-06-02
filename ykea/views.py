@@ -124,7 +124,7 @@ def buy(request):
     items = []
     preuTotal = 0
     for i in quant:
-        quantitat = Quantity.objects.get(item = i).quantitat
+        quantitat = Quantity.objects.get(item = i, shopping_cart = cart).quantitat
         totalItem = float(quantitat) * float(i.price)
         preuTotal += totalItem
         items.append([i, quantitat, totalItem])
@@ -141,8 +141,9 @@ def buy(request):
     return render(request, 'ykea/shoppingcart.html', context)
 
 def delete(request):
+    cart = request.session["cart"]
     for id in request.session["delete"]:
-            Quantity.objects.get(item=Item.objects.get(item_number = id)).delete()
+            Quantity.objects.get(item=Item.objects.get(item_number = id), shopping_cart = cart).delete()
     return HttpResponseRedirect(reverse('buy'))
 
 def checkout(request):
@@ -152,11 +153,11 @@ def checkout(request):
     bill = Bill.objects.create(user = Wallet.objects.get(user = request.user), total = 0)
 
     for item_id in request.session["sum"]:
-        Quantity.objects.filter(item = Item.objects.get(item_number = item_id[0][6:])).update(quantitat = item_id[1])
+        Quantity.objects.filter( shopping_cart = cart, item = Item.objects.get(item_number = item_id[0][6:])).update(quantitat = item_id[1])
 
     preuTotal = 0
     for i in quant:
-        quantitat = Quantity.objects.get(item = i).quantitat
+        quantitat = Quantity.objects.get(item = i, shopping_cart = cart).quantitat
         totalItem = float(quantitat) * float(i.price)
         preuTotal += totalItem
         items.append([i, quantitat, totalItem])
@@ -181,7 +182,7 @@ def checkout(request):
         request.user.wallet.money -= preuTotal
         context['money'] = request.user.wallet.money
 
-    Quantity.objects.all().delete()
+    Quantity.objects.get(shopping_cart = cart).delete()
     Shoppingcart.objects.get(id_cart = cart).delete()
     request.session["cart"]=[]
     return render(request, 'ykea/checkout.html', context)
