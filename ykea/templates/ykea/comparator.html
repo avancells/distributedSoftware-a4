@@ -172,7 +172,7 @@
                 }));
 
                 }
-                $.when.apply($, requests).then(function() {
+                $.when.apply($, requests).fail(function() {
                   results.sort(function(a,b){return parseInt(a[1]) - parseInt(b[1]);});
                   for(var i=0; i< results.length; i++){
                     $("#query").append(results[i][0]);
