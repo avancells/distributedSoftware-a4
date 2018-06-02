@@ -125,7 +125,7 @@
 
             <script>
             function comparator() {
-
+                $("#query").html("");
                 var category = $("#categoryList :selected").val();
                 var parameters = "/?category=" + category;
 
@@ -145,7 +145,7 @@
                 var ips = {{ips | safe}};
                 var results = [];
                 for(var i=0; i < ips.length; i++){
-                    requests.push($.ajax({url: 'https://' + ips[i] + '/api/items' + parameters, type : 'GET', dataType : 'json', error :  function(error, exception){msg = 'Error';},
+                    requests.push($.ajax({url: 'https://' + ips[i] + '/api/items' + parameters, type : 'GET', dataType : 'json', error :  function(){console.log("Error at: " + ips[i]);},
                         success: function (data){
                         for(var j=0; j < data.results.length; j++){
                             var entry ='<div class="card h-100"><a href="#"><img class="card-img-top" src="';
@@ -174,7 +174,6 @@
                 }
                 $.when.apply($, requests).then(function() {
                   results.sort(function(a,b){return parseInt(a[1]) - parseInt(b[1]);});
-                  $("#query").html("");
                   for(var i=0; i< results.length; i++){
                     $("#query").append(results[i][0]);
                   }
