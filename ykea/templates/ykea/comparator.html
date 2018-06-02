@@ -172,10 +172,10 @@
                 }));
 
                 }
-                $.when.apply($, requests).fail(function() {
+                $.when.apply($, requests).always(function() {
                   results.sort(function(a,b){return parseInt(a[1]) - parseInt(b[1]);});
-                  for(var i=0; i< results.length; i++){
-                    $("#query").append(results[i][0]);
+                  for (html in results){
+                    $("#query").append(html[0]);
                   }
                 });
 
