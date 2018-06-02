@@ -124,35 +124,6 @@
           <div id="query" class="row">
 
             <script>
-            function showQuery(data) {
-              $("#query").html("");
-              data.sort(function(a,b){return parseInt(a[1]) - parseInt(b[1]);});
-              for(var j=0; j< data.length; j++){
-                  var entry ='<div class="card h-100"><a href="#"><img class="card-img-top" src="';
-                  if(data["results"][j]["featured_photo"]){
-                      entry += data["results"][j]["featured_photo"];
-                  }else{
-                      entry += "https://sd2018-ykeaa4.herokuapp.com/ykea/static/images/default.jpg"
-                  }
-
-                  entry += '" alt=""></a><h4>';
-                  entry += data["results"][j]["name"];
-                  entry += '</h4><h5>';
-                  entry += data["results"][j]["price"];
-                  entry +='</h5><p class="card-text">';
-                  entry += data["results"][j]["description"];
-                  entry +='</p><h6> From: ';
-                  entry +=  data['results'][j]['url'].substring(8, data['results'][j]['url'].indexOf('/', 8));
-                  entry += '</h6></div></div>';
-
-                  var html_copy = $(entry);
-                  $("#query").append(html_copy)/*$('<div class="col-lg-4 col-md-6 mb-4">').html(results[i][0])*/.appendTo("#comparator");
-              }
-            }
-
-
-
-
             function comparator() {
 
                 var category = $("#categoryList :selected").val();
@@ -169,21 +140,15 @@
                   parameters += "&new=no";
                 }
 
-
-                //deferred = $.ajax(‘http://api.server.com/'+id, {success: function(result) {results.push(result);} deferreds.push(deferred);});
                 var counter = 0;
-                var request, requests = [];
+                const request, requests = [];
                 var ips = {{ips | safe}};
                 var results = [];
                 for(var i=0; i < ips.length; i++){
-                    requests.push($.ajax({url: 'https://' + ips[i] + '/api/items' + parameters, type : 'GET', dataType : 'json', error :  function(error, exception){msg = 'Error';
-                    counter += 1;
-                    if(counter== ips.length){
-                      showQuery(results);
-                    } },
+                    requests.push($.ajax({url: 'https://' + ips[i] + '/api/items' + parameters, type : 'GET', dataType : 'json', error :  function(error, exception){msg = 'Error';},
                         success: function (data){
                         for(var j=0; j < data.results.length; j++){
-                            /*var entry ='<div class="card h-100"><a href="#"><img class="card-img-top" src="';
+                            var entry ='<div class="card h-100"><a href="#"><img class="card-img-top" src="';
                             if(data["results"][j]["featured_photo"]){
                                 entry += data["results"][j]["featured_photo"];
                             }else{
@@ -201,42 +166,19 @@
                             entry += '</h6></div></div>';
 
                             var html_copy = $(entry);
-                            results.push([html_copy, data["results"][j]["price"]]);*/
-                            results.push(data["results"][j]);
-                        }
-                        counter += 1;
-                        if(counter== ips.length){
-                          showQuery(results);
+                            results.push([html_copy, data["results"][j]["price"]]);
                         }
                         }
                 }));
 
                 }
-                /*$.when.apply(0, requests).done(function() {
-                  $("#query").html("");
+                $.when.apply($, requests).then(function() {
                   results.sort(function(a,b){return parseInt(a[1]) - parseInt(b[1]);});
-                  for(var j=0; j< results.length; j++){
-                      var entry ='<div class="card h-100"><a href="#"><img class="card-img-top" src="';
-                      if(data["results"][j]["featured_photo"]){
-                          entry += data["results"][j]["featured_photo"];
-                      }else{
-                          entry += "https://sd2018-ykeaa4.herokuapp.com/ykea/static/images/default.jpg"
-                      }
-
-                      entry += '" alt=""></a><h4>';
-                      entry += data["results"][j]["name"];
-                      entry += '</h4><h5>';
-                      entry += data["results"][j]["price"];
-                      entry +='</h5><p class="card-text">';
-                      entry += data["results"][j]["description"];
-                      entry +='</p><h6> From: ';
-                      entry +=  data['results'][j]['url'].substring(8, data['results'][j]['url'].indexOf('/', 8));
-                      entry += '</h6></div></div>';
-
-                      var html_copy = $(entry);
-                      $("#query").append(html_copy)/*$('<div class="col-lg-4 col-md-6 mb-4">').html(results[i][0]).appendTo("#comparator");
+                  $("#query").html("");
+                  for(var i=0; i< results.length; i++){
+                    $("#query").append($('<div class="col-lg-4 col-md-6 mb-4">').html(results[i][0]).appendTo("#comparator"));
                   }
-                });*/
+                });
 
             }
 
