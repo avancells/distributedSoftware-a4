@@ -177,13 +177,14 @@
                             var html_copy = $(entry);
                             results.push([html_copy, data["results"][j]["price"]]);
                             counter += 1;
-                            if (counter == ips.length){
-                              results.sort(function(a,b){return parseInt(a[1]) - parseInt(b[1]);});
-                              for(var i=0; i< results.length; i++){
-                                  $("#query").append($('<div class="col-lg-4 col-md-6 mb-4">').html(results[i][0]).appendTo("#comparator"));
-                              }
-                            }
                         }
+                        if (counter == ips.length){
+                          results.sort(function(a,b){return parseInt(a[1]) - parseInt(b[1]);});
+                          for(var i=0; i< results.length; i++){
+                              $("#query").append($('<div class="col-lg-4 col-md-6 mb-4">').html(results[i][0]).appendTo("#comparator"));
+                          }
+                        }
+
                         }
                 }))
 
