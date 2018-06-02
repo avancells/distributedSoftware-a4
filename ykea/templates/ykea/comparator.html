@@ -166,10 +166,10 @@
                             entry += '</h6></div></div>';
 
                             var html_copy = $(entry);
-                            results.push([html_copy, data["results"][j]["price"]]);
+                            results.push(html_copy, data["results"][j]["price"]]);
                         }
                         }
-                }));
+                }))
 
                 }
                 $.when.apply($, requests).then(function() {
