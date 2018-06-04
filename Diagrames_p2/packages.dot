@@ -1,0 +1,8 @@
+digraph "packages" {
+charset="utf-8"
+rankdir=BT
+"0" [label="practicaWeb", shape="box"];
+"1" [label="practicaWeb.settings", shape="box"];
+"2" [label="practicaWeb.urls", shape="box"];
+"3" [label="practicaWeb.wsgi", shape="box"];
+}
